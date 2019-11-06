@@ -1,0 +1,14 @@
+.link-text{
+    color:white;
+    text-decoration: none;
+}
+.dashboard-links{
+    width:100%;
+
+}
+
+.link-button{
+    width:100%;
+    background-color: gray;
+    height: 50px;
+}
