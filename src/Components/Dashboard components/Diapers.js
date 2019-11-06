@@ -22,7 +22,7 @@ export default class Diapers extends React.Component {
                         <label for="pees">Pees</label>
 
                     </fieldset>
-
+                    <button type="submit">Save</button>
                 </form>
 
                 <section>
