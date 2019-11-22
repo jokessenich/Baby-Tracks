@@ -4,22 +4,36 @@ import './CSS/Dashboard.css'
 
 export default class Dashboard extends React.Component {
 
+    componentDidMount() {
+        fetch(`http://localhost:8000/nursing/${localStorage.getItem('token')}`)
+            .then(res => {
+                if (!res.ok) {
+                    this.props.history.push('/error')
+
+                }
+            })
+    }
+
     render() {
         return (
-            <div>
-                <h1>Baby Tracks App Dashboard</h1>
+            <div className="dashboard">
+                <h1>Dashboard</h1>
                 <section className="dashboard-links">
-                    <div className="link-button">
-                        <NavLink to='/nursing' className="link-text">Nursing</NavLink><br />
-                    </div>
-                    <div className="link-button">
-                    <NavLink to='/diapers' className="link-text">Diapers</NavLink><br />
-                    </div>
-                    <div className="link-button">
-                    <NavLink to='/sleep' className="link-text">Sleep</NavLink><br />
-                    </div>
+                    <NavLink to='/nursing' className="link-text">
+                        <div className="link-button">
+                            Nursing</div></NavLink>
+
+                    <NavLink to='/diapers' className="link-text">
+                        <div className="link-button">
+                            Diapers</div></NavLink>
+
+
+                    <NavLink to='/sleep' className="link-text">
+                        <div className="link-button">
+                            Sleep</div></NavLink><br />
+
                 </section>
-            </div>
+            </div >
         )
     }
 }

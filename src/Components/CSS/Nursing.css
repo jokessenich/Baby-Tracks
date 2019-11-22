@@ -1,8 +1,121 @@
 .nursing-timer-button{
-    height: 50px;
-    width: 100px;
+    font-family: 'Baloo Bhai', cursive;
+    border-radius: 10px;
+    height: 75px;
+    width: 40%;
+    background-color: #DDE2DB;
+    font-size: 40px;
+    margin-top: -5px;
+    margin-bottom:10px;
+}
+
+h2{
+    margin:0px;
 }
 
 .nursing-entry{
-    background-color: gray;
+    background-color: #BCBAD6;
+    border-radius: 10px;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+
+.nursing-page{
+    background-color: #FFDEDC;
+    font-family: 'Baloo Bhai', cursive;
+
+}
+
+.delete-button, .update-button{
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+
+}
+
+button:hover{
+    background-color: rgb(71, 68, 109);
+    color: white;
+    cursor: pointer;
+}
+
+fieldset{
+    margin-left: auto;
+    margin-right:auto;
+}
+
+input{
+    font-family: 'Baloo Bhai', cursive;
+    font-size: 20px;
+}
+
+.current-time{
+    font-size: 40pt;
+    border: 1px solid white;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+    background-color: white;
+    color: black;
+   margin-top:20px;
+
+}
+
+.material-icons{
+    font-size: 40px;
+}
+
+
+section.timer {
+    background-color: #BCBAD6;
+    border-radius: 10px;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px
+}
+
+.save-button{
+    height: 50px;
+    width: 30%;
+    border-radius: 10px;
+    background-color: #DDE2DB;
+    font-size: 16px;
+    font-family: 'Baloo Bhai', cursive;
+    margin-bottom:20px;
+    margin-top:10px;
+}
+
+.avg.time{
+    text-align: left;
+    margin-left: 5%;
+    margin-top: 20px;
+}
+
+.avg{
+    text-align: center;
+    font-family: 'Didact Gothic', sans-serif;
+
+}
+
+.nursing-entry-header{
+    background-color: #BCBAD6;
+    border-radius: 10px;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto; 
+    
+
+}
+
+.minutes-seconds{
+    width: 50px;
+}
+
+.nursing-entry>p{
+    text-align: left;
+    margin-left: 20px;
 }

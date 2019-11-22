@@ -1,0 +1,27 @@
+.login-input{
+    width: 60%;
+}
+
+.login-field{
+    border: 2px solid #FFDEDC;
+}
+
+.login-page{
+    background-color: #FFDEDC;
+}
+
+.register-link{
+    color: black;
+
+}
+
+.register-link:hover{
+    background-color: #BCBAD6;
+    color: white;
+    padding:5px;
+    border-radius: 5px;
+}
+
+.register{
+    padding: 10px;
+}

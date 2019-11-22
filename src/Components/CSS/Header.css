@@ -1,0 +1,57 @@
+.header-page{
+    background-color: #FFDEDC;
+    font-family: 'Baloo Bhai', cursive;
+    height: 100%;
+    display: flex;
+
+}
+.header-page>h3{
+    margin-top: 5px;
+    margin-left: 5px;
+    margin-bottom: 5px;
+}
+.header-page>img{
+    margin-top:5px;
+    height:26px;
+    margin-left:5px;
+}
+
+
+form{
+    font-family: 'Fredoka One', cursive;
+    
+}
+
+.nav-bar-header{
+    border-radius: 5px;
+    height: 25px;
+    width: 100px;
+    text-decoration: none;
+    color:black;
+    margin-top: 5px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    padding:5px;
+}
+
+.nav-bar-header:hover{
+    cursor: pointer;
+    background-color: #f0b4b4;
+    
+}
+
+.header-links{
+    position: absolute;
+    right: 0px;
+    top:5px;
+}
+
+input{
+    margin: 10px;
+}
+
+footer{
+        font-family: 'Baloo Bhai', cursive;
+
+}

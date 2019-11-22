@@ -1,3 +1,41 @@
+.diaper-timer-button{
+    border-radius: 5px;
+    height: 50px;
+    width: 100px;
+    background-color: #DDE2DB;
+}
+
 .diaper-entry{
-    background-color: gray;
+    background-color: #BCBAD6;
+    border-radius: 10px;
+}
+
+.diaper-page{
+    background-color: #FFDEDC;
+    font-family: 'Baloo Bhai', cursive;
+}
+
+.delete-button{
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+
+}
+
+button:hover{
+    background-color: rgb(71, 68, 109);
+    color: white;
+    cursor: pointer;
+}
+
+fieldset{
+    background-color: #BCBAD6;
+    border-radius: 10px;
+    border: none;
+}
+
+input{
+    font-family: 'Baloo Bhai', cursive;
+    font-size: 20px;
+
 }
