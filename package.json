@@ -17,7 +17,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "npm run build && now ./build --name=myapp-spa"
+    "deploy": "npm run build && now ./build --name=baby-tracks-app"
   },
   "eslintConfig": {
     "extends": "react-app"

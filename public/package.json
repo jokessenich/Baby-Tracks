@@ -1,6 +1,6 @@
 
 {
-    "name": "myapp-spa",
+    "name": "baby-tracks-app",
     "version": "1.0.0",
     "scripts": {
       "start": "serve --single --cache=60000"
