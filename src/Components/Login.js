@@ -2,6 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import config from '../config'
 import './CSS/Login.css'
+const queryString = require('query-string');
+
 
 export default class Login extends React.Component {
     constructor(props) {
@@ -38,6 +40,11 @@ export default class Login extends React.Component {
                 localStorage.setItem('token', token)
                 this.props.history.push('/dashboard')
                 window.location.reload()
+                const params = queryString.parse(document.location.search);
+                const redirect = params.redirect; // this would be "abcdefg" if the query was "?redirect=abcdefg"
+                if (document.location.pathname === '/' && redirect) {
+                    document.location.assign(`${document.location.origin}/${redirect}`);
+                }
             })
             .catch(error => {
                 this.setState({
@@ -49,30 +56,30 @@ export default class Login extends React.Component {
     render() {
         const error = this.state.error
         return (
-            <div className = "login-page">
+            <div className="login-page">
                 <h1 className="log-header">Login</h1>
                 <form onSubmit={this.onSubmit}>
-                    <fieldset className = "login-field">
-                    <label htmlFor="email">Email</label><br />
-                    <input
-                        className="login-input"
-                        type="text"
-                        name="email">
-                    </input><br />
+                    <fieldset className="login-field">
+                        <label htmlFor="email">Email</label><br />
+                        <input
+                            className="login-input"
+                            type="text"
+                            name="email">
+                        </input><br />
 
-                    <label htmlFor="password">Password</label><br />
-                    <input
-                        className="login-input"
-                        type="text"
-                        name="userpassword"></input><br />
-                    {error}<br />
-                    <button className = "save-button" type="submit">Login</button>
+                        <label htmlFor="password">Password</label><br />
+                        <input
+                            className="login-input"
+                            type="text"
+                            name="userpassword"></input><br />
+                        {error}<br />
+                        <button className="save-button" type="submit">Login</button>
                     </fieldset>
                 </form>
 
                 <section className="register">
                     <span>Not a Member?  </span>
-                    <Link to="/user/register" className = "register-link">Register</Link>
+                    <Link to="/user/register" className="register-link">Register</Link>
                 </section>
             </div>
         )

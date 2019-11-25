@@ -34,6 +34,7 @@ export default class Main extends React.Component{
                     <Route path='/nursing' component={Nursing}></Route>
                     <Route path='/sleep' component={Sleep}></Route>
                     <Route path='/diapers' component={Diapers}></Route>
+                    
 
                 </Switch>
             </div>

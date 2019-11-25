@@ -6,6 +6,7 @@
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.27",
     "pretty-ms": "^5.0.0",
+    "qs": "^6.9.1",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-router-dom": "^5.1.2",
@@ -15,7 +16,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "npm run build && now ./build --name=myapp-spa"
   },
   "eslintConfig": {
     "extends": "react-app"
