@@ -19,7 +19,7 @@ render(){
             <br />
             {diaper.diapertype}</p>
 
-            <button type="button" id={diaper.id} onClick={handleDelete}>Delete Button</button>
+            <button className = "delete-button" type="button" id={diaper.id} onClick={handleDelete}>Delete Button</button>
         </div>)
 
     }

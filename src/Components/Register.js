@@ -1,4 +1,6 @@
 import React from 'react'
+import config from '../config'
+
 
 export default class Register extends React.Component {
     constructor(props) {
@@ -27,7 +29,7 @@ export default class Register extends React.Component {
         debugger;
         let newUser = { userpassword, email }
 
-        fetch('http://localhost:8000/user/register', {
+        fetch(`${config.API_BASE_URL}/user/register`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -57,7 +59,7 @@ export default class Register extends React.Component {
         const pError = this.state.repeatPassword !== this.state.password ? "Passwords must match" : ""
         return (
             <div className = "login-page">
-                <h1>Registration</h1>
+                <h1 className="log-header">Registration</h1>
                 <form onSubmit={this.onSubmit}>
                 <fieldset className = "login-field">
                     <label htmlFor="email">Email</label><br />
@@ -86,7 +88,7 @@ export default class Register extends React.Component {
 
                     {error}
                     {pError}<br />
-                    <button type="submit" disabled={this.state.repeatPassword !== this.state.password} >Register</button>
+                    <button type="submit" className = "save-button" disabled={this.state.repeatPassword !== this.state.password} >Register</button>
                     </fieldset>
                 </form>
             </div>

@@ -1,5 +1,6 @@
 import React from 'react'
 import './CSS/Header.css'
+import config from '../config'
 import { Link, withRouter } from 'react-router-dom'
 
 class Header extends React.Component {
@@ -11,7 +12,7 @@ class Header extends React.Component {
     }
 
     componentDidMount() {
-        fetch(`http://localhost:8000/nursing/${localStorage.getItem('token')}`)
+        fetch(`${config.API_BASE_URL}/nursing/${localStorage.getItem('token')}`)
             .then(res => {
                 if (res.ok) {
                     this.setState({ loggedIn: true })

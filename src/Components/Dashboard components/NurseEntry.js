@@ -1,6 +1,7 @@
 import React from 'react'
 import moment from 'moment'
 import '../CSS/Nursing.css'
+import config from '../../config'
 const ms = require('pretty-ms')
 
 export default class NurseEntry extends React.Component {
@@ -57,7 +58,7 @@ export default class NurseEntry extends React.Component {
             leftside: left
         }
 
-        fetch(`http://localhost:8000/nursing/${localStorage.getItem('token')}/${this.props.nurseProp.id}`, {
+        fetch(`${config.API_BASE_URL}/nursing/${localStorage.getItem('token')}/${this.props.nurseProp.id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
@@ -198,8 +199,8 @@ export default class NurseEntry extends React.Component {
 
             <div className="nursing-entry">
                 <p> Date: {moment(nurse.starttime, ('YYYY-MM-DDhh:mm a')).format('L')} <br />
-                    Start Time: {moment(nurse.starttime, ('YYYY-MM-DDHH:mm')).format('LT')}<br />
-                        End Time: {moment(nurse.starttime, ('YYYY-MM-DDhh:mm')).format('LT')}<br />
+                    Start Time: {moment(nurse.starttime, ('YYYY-MM-DDhh:mm a')).format('hh:mm a')}<br />
+                        End Time: {moment(nurse.endtime, ('YYYY-MM-DDhh:mm a')).format('hh:mm a')}<br />
                     Left: {ms(nurse.leftside)}<br /> Right: {ms(nurse.rightside)}<br />
                     Total: {ms(Math.abs(nurse.duration))}
                 </p>

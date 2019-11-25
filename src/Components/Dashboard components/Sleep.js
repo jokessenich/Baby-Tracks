@@ -3,6 +3,8 @@ import '../CSS/Sleep.css'
 import { dummySleep } from './dummySleep'
 import moment from 'moment'
 import SleepEntry from './SleepEntry'
+import config from '../../config.js'
+
 
 export default class Sleep extends React.Component {
     constructor(props) {
@@ -14,7 +16,7 @@ export default class Sleep extends React.Component {
     }
 
     componentDidMount() {
-        fetch(`http://localhost:8000/sleep/${localStorage.getItem('token')}`)
+        fetch(`${config.API_BASE_URL}/sleep/${localStorage.getItem('token')}`)
             .then(res => {
                 if(!res.ok){
                     this.props.history.push('/error')
@@ -43,7 +45,7 @@ export default class Sleep extends React.Component {
             duration: duration
         }
 
-        fetch(`http://localhost:8000/sleep/${localStorage.getItem('token')}`, {
+        fetch(`${config.API_BASE_URL}/sleep/${localStorage.getItem('token')}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -81,7 +83,7 @@ export default class Sleep extends React.Component {
 
     handleDelete = (e) => {
         const id = e.target.id
-        fetch(`http://localhost:8000/sleep/${localStorage.getItem('token')}/${id}`, {
+        fetch(`${config.API_BASE_URL}/sleep/${localStorage.getItem('token')}/${id}`, {
             method: 'DELETE',
             headers: {
                 'content-type': 'application/json'
@@ -98,8 +100,7 @@ export default class Sleep extends React.Component {
         const error = this.state.error
         return (
             <div className="sleep-page">
-                <h1>Sleep Page</h1>
-                <h2>Input Sleep</h2>
+                <h1>Sleep</h1>
                 <form onSubmit={this.handleSubmit}>
                     <fieldset>
                         {error}<br />

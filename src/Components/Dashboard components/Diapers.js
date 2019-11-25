@@ -3,6 +3,7 @@ import '../CSS/Diapers.css'
 import moment from 'moment'
 import DiaperEntry from './DiaperEntry'
 import { dummyDiapers } from './dummyDiapers'
+import config from '../../config.js'
 
 export default class Diapers extends React.Component {
     constructor(props) {
@@ -15,7 +16,7 @@ export default class Diapers extends React.Component {
     }
 
     componentDidMount() {
-        fetch(`http://localhost:8000/diapers/${localStorage.getItem('token')}`)
+        fetch(`${config.API_BASE_URL}/diapers/${localStorage.getItem('token')}`)
             .then(res => {
                 if (!res.ok){
                     this.props.history.push('/error')
@@ -49,7 +50,7 @@ export default class Diapers extends React.Component {
             diapertype: this.state.diaper,
         }
 
-        fetch(`http://localhost:8000/diapers/${localStorage.getItem('token')}`, {
+        fetch(`${config.API_BASE_URL}/diapers/${localStorage.getItem('token')}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -87,7 +88,7 @@ export default class Diapers extends React.Component {
 
         const id = e.target.id
 
-        fetch(`http://localhost:8000/diapers/${localStorage.getItem('token')}/${id}`, {
+        fetch(`${config.API_BASE_URL}/diapers/${localStorage.getItem('token')}/${id}`, {
             method: 'DELETE',
             headers: {
                 'content-type': 'application/json'
@@ -134,9 +135,11 @@ export default class Diapers extends React.Component {
                         <label htmlFor="poos">Poos</label>
                         <input type="radio" id="pees" value="Pees" checked={this.state.diaper === 'Pees'} onChange={this.handleChange}></input>
                         <label htmlFor="pees">Pees</label>
+                        <input type="radio" id="mixed" value="Mixed" checked={this.state.diaper === 'Mixed'} onChange={this.handleChange}></input>
+                        <label htmlFor="mixed">Mixed</label>
 
-                    </fieldset>
                     <button type="submit" className = "save-button">Save</button>
+                    </fieldset>
                 </form>
 
                 <section>

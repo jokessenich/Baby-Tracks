@@ -5,6 +5,7 @@ import moment from 'moment'
 import RightTimer from './RightTimer'
 import NursingStartTimer from './NursingStartTimer'
 import NurseEntry from './NurseEntry'
+import config from '../../config.js'
 const ms = require('pretty-ms')
 
 
@@ -35,7 +36,7 @@ export default class Nursing extends React.Component {
     }
 
     componentDidMount() {
-        fetch(`http://localhost:8000/nursing/${localStorage.getItem('token')}`)
+        fetch(`${config.API_BASE_URL}/nursing/${localStorage.getItem('token')}`)
 
             .then(res => {
                 if (!res.ok) {
@@ -165,7 +166,7 @@ export default class Nursing extends React.Component {
             leftside: left
         }
 
-        fetch(`http://localhost:8000/nursing/${localStorage.getItem('token')}`, {
+        fetch(`${config.API_BASE_URL}/nursing/${localStorage.getItem('token')}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -206,7 +207,7 @@ export default class Nursing extends React.Component {
 
     handleDelete = (e) => {
         const id = e.target.id
-        fetch(`http://localhost:8000/nursing/${localStorage.getItem('token')}/${id}`, {
+        fetch(`${config.API_BASE_URL}/nursing/${localStorage.getItem('token')}/${id}`, {
             method: 'DELETE',
             headers: {
                 'content-type': 'application/json'
@@ -260,7 +261,7 @@ export default class Nursing extends React.Component {
                 }
             })
         }
-        else if (this.state.rightSideFirst) {
+        else if (!this.state.rightSideFirst) {
             this.setState({
                 left: {
                     start: this.state.left.start.subtract(timeDiff, 'minutes'),

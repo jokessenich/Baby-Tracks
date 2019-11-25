@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import config from '../config'
 import './CSS/Login.css'
 
 export default class Login extends React.Component {
@@ -17,7 +18,7 @@ export default class Login extends React.Component {
         let userpassword = e.target.userpassword.value
         let user = { email, userpassword }
 
-        fetch('http://localhost:8000/user/login', {
+        fetch(`${config.API_BASE_URL}/user/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -49,7 +50,7 @@ export default class Login extends React.Component {
         const error = this.state.error
         return (
             <div className = "login-page">
-                <h1>Login</h1>
+                <h1 className="log-header">Login</h1>
                 <form onSubmit={this.onSubmit}>
                     <fieldset className = "login-field">
                     <label htmlFor="email">Email</label><br />
