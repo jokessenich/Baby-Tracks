@@ -1,8 +1,6 @@
 import React from 'react'
 import '../CSS/Nursing.css'
-import { dummyNurse } from './dummyNurse'
 import moment from 'moment'
-const ms = require('pretty-ms')
 
 export default class RightTimer extends React.Component {
     constructor(props) {

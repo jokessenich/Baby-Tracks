@@ -1,5 +1,4 @@
 import React from 'react'
-import moment from 'moment'
 
 export default class NursingStartTimer extends React.Component {
     constructor(props) {

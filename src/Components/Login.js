@@ -15,7 +15,6 @@ export default class Login extends React.Component {
 
     onSubmit = (e) => {
         e.preventDefault()
-        console.log('login attempt')
         let email = e.target.email.value.toLowerCase()
         let userpassword = e.target.userpassword.value
         let user = { email, userpassword }
@@ -58,7 +57,7 @@ export default class Login extends React.Component {
         return (
             <div className="login-page">
                 <h1 className="log-header">Login</h1>
-                <p>Baby Tracks is an app that allows users to track the nursing, diapers and sleeping habits of their babies. The nursing timer can be for the left or right side and the start time can be edited as needed.</p>
+                <p className = "app-desc">Baby Tracks is an app that allows users to simply and easily track the nursing, diapers and sleeping habits of their babies. </p>
                 <form onSubmit={this.onSubmit}>
                     <fieldset className="login-field">
                         <label htmlFor="email">Email</label><br />

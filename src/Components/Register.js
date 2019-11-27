@@ -26,7 +26,6 @@ export default class Register extends React.Component {
         e.preventDefault()
         let userpassword = this.state.password
         let email = this.state.email.toLowerCase()
-        debugger;
         let newUser = { userpassword, email }
 
         fetch(`${config.API_BASE_URL}/user/register`, {
@@ -40,7 +39,6 @@ export default class Register extends React.Component {
                 if (!res.ok) {
                     return res.json()
                         .then(error => {
-                            console.log(error)
                             throw error
                         })
                 }
@@ -60,6 +58,7 @@ export default class Register extends React.Component {
         return (
             <div className = "login-page">
                 <h1 className="log-header">Registration</h1>
+                <p className = "app-desc">Baby Tracks is an app that allows users to simply and easily track the nursing, diapers and sleeping habits of their babies. </p>
                 <form onSubmit={this.onSubmit}>
                 <fieldset className = "login-field">
                     <label htmlFor="email">Email</label><br />

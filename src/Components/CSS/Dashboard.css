@@ -37,3 +37,31 @@ a.link-text{
 h1{
     margin-top: 0px;
 }
+
+@media only screen and (min-width: 600px){
+
+    .link-button{
+        width: 500px;
+        margin-bottom: 25px;
+    }
+
+    .dashboard-label{
+        font-size:40pt;
+        padding-bottom: 75px;
+    }
+}
+
+@media only screen and (min-width: 900px){
+    
+    .dashboard-links{
+        display: flex;
+        flex-direction:row;
+    }
+    .link-button{
+        width: 250px;
+        height: 150px;
+        padding-top:20%;
+        
+    }
+    
+}

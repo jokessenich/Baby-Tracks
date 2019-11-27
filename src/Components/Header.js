@@ -32,7 +32,7 @@ class Header extends React.Component {
             <Link to='/user/login' className="nav-bar-header log">Login</Link>
         return (
             <div className = "header-page">
-                <h3>Baby Tracks </h3><img src="https://img.icons8.com/metro/26/000000/baby-feet.png"></img>
+                <h3>Baby Tracks </h3><img src="https://img.icons8.com/metro/26/000000/baby-feet.png" alt = "icon of baby feet"></img>
                 <div className = "header-links">
                 {loggedIn}
                 <Link to='/dashboard' className="nav-bar-header dash">Dashboard</Link>

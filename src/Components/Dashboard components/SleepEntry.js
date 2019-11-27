@@ -4,9 +4,7 @@ const ms = require('pretty-ms')
 
 
 export default class SleepEntry extends React.Component {
-    constructor(props) {
-        super(props)
-    }
+
 
     render() {
         const sleep = this.props.sleepProp

@@ -18,7 +18,7 @@ export default class Dashboard extends React.Component {
     render() {
         return (
             <div className="dashboard">
-                <h1>Dashboard</h1>
+                <h1 className = "dashboard-label">Dashboard</h1>
                 <section className="dashboard-links">
                     <NavLink to='/nursing' className="link-text">
                         <div className="link-button">

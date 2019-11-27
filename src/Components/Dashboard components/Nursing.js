@@ -1,8 +1,6 @@
 import React from 'react'
 import '../CSS/Nursing.css'
-import { dummyNurse } from './dummyNurse'
 import moment from 'moment'
-import RightTimer from './RightTimer'
 import NursingStartTimer from './NursingStartTimer'
 import NurseEntry from './NurseEntry'
 import config from '../../config.js'
@@ -180,6 +178,7 @@ export default class Nursing extends React.Component {
                     })
                 }
             })
+            .then(window.location.reload())
 
 
         this.setState({
@@ -201,22 +200,22 @@ export default class Nursing extends React.Component {
             },
         })
 
-        window.location.reload()
 
     }
 
     handleDelete = (e) => {
-        const id = e.target.id
+        const id = parseInt(e.target.id)
         fetch(`${config.API_BASE_URL}/nursing/${localStorage.getItem('token')}/${id}`, {
             method: 'DELETE',
             headers: {
                 'content-type': 'application/json'
             },
         })
-        const nursings = this.state.log.filter(nurse => nurse.id != id)
+        const nursings = this.state.log.filter(nurse => nurse.id !== id)
         this.setState({
             log: nursings
         })
+
 
     }
 
@@ -292,7 +291,7 @@ export default class Nursing extends React.Component {
             <button onClick={this.stopRightTimer} className="nursing-timer-button"><i class="material-icons">pause</i>
             </button>
 
-        const pastNurse = this.state.log.map(nurse => <NurseEntry nurseProp={nurse} handleDelete={this.handleDelete} key={nurse.id}></NurseEntry>)
+        const pastNurse = this.state.log.map(nurse => <NurseEntry nurseProp={nurse} handleDelete={this.handleDelete} key = {"nurse"+nurse.id}></NurseEntry>)
 
         const nursingStartTime = this.state.total.isOn ? <NursingStartTimer changeStart={this.changeStart} startTime={moment().subtract((this.state.total.time) / 1000, 'seconds')}></NursingStartTimer> : ""
 

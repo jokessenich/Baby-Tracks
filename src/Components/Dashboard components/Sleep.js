@@ -1,6 +1,5 @@
 import React from 'react'
 import '../CSS/Sleep.css'
-import { dummySleep } from './dummySleep'
 import moment from 'moment'
 import SleepEntry from './SleepEntry'
 import config from '../../config.js'
@@ -76,27 +75,26 @@ export default class Sleep extends React.Component {
             this.setState({
                 log: [newSleep, ...this.state.log]
             })
-        
         window.location.reload()
         }
     }
 
     handleDelete = (e) => {
-        const id = e.target.id
+        const id = parseInt(e.target.id)
         fetch(`${config.API_BASE_URL}/sleep/${localStorage.getItem('token')}/${id}`, {
             method: 'DELETE',
             headers: {
                 'content-type': 'application/json'
             },
         })
-        const sleeps = this.state.log.filter(sleep => sleep.id != id)
+        const sleeps = this.state.log.filter(sleep => sleep.id !== id)
         this.setState({
             log: sleeps
         })
     }
 
     render() {
-        const pastSleep = this.state.log.map(sleep => <SleepEntry sleepProp={sleep} handleDelete={this.handleDelete}></SleepEntry>)
+        const pastSleep = this.state.log.map(sleep => <SleepEntry sleepProp={sleep} handleDelete={this.handleDelete} key = {"sleep" + sleep.id}></SleepEntry>)
         const error = this.state.error
         return (
             <div className="sleep-page">

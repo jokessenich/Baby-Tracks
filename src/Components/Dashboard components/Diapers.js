@@ -2,7 +2,6 @@ import React from 'react'
 import '../CSS/Diapers.css'
 import moment from 'moment'
 import DiaperEntry from './DiaperEntry'
-import { dummyDiapers } from './dummyDiapers'
 import config from '../../config.js'
 
 export default class Diapers extends React.Component {
@@ -65,28 +64,30 @@ export default class Diapers extends React.Component {
                         })
                 }
             })
+            .then(res=>{
+                if (moment().diff(moment(newDiaper.diaperdate + newDiaper.diapertime, ('YYYY-MM-DDhh:mm')))<0){
+                    this.setState({
+                        error: "Date cannot be in the future"
+                    })
+                }
+                else{
+                this.setState({
+                    log: [newDiaper, ...this.state.log]
+                })
+                window.location.reload()
+            }}
+            )
+
             .catch(error => {
                 this.setState({
                     error: error
                 })
             })
-
-        if (moment().diff(moment(newDiaper.diaperdate + newDiaper.diapertime, ('YYYY-MM-DDhh:mm')))<0){
-            this.setState({
-                error: "Date cannot be in the future"
-            })
-        }
-        else{
-        this.setState({
-            log: [newDiaper, ...this.state.log]
-        })
-        window.location.reload()
-    }
     }
 
     handleDelete = (e) => {
 
-        const id = e.target.id
+        const id = parseInt(e.target.id)
 
         fetch(`${config.API_BASE_URL}/diapers/${localStorage.getItem('token')}/${id}`, {
             method: 'DELETE',
@@ -100,21 +101,28 @@ export default class Diapers extends React.Component {
                 .then(error=>{
                 throw error
             })}
+
         })
+        .then(res=>{
+            const diapers = this.state.log.filter(diapers => diapers.id !== id)
+            this.setState({
+                log: diapers
+        })
+    })
         .catch(error=> {
             this.setState({
                 error: error.message
             })
+        
+        
+
         })
         
-        const diapers = this.state.log.filter(diapers => diapers.id != id)
-        this.setState({
-            log: diapers
-        })
+
     }
 
     render() {
-        const pastDiapers = this.state.log.map(diaper => <DiaperEntry diaperProp={diaper} handleDelete={this.handleDelete}></DiaperEntry>)
+        const pastDiapers = this.state.log.map(diaper => <DiaperEntry key = {"diaper"+diaper.id} diaperProp={diaper} handleDelete={this.handleDelete} ></DiaperEntry>)
         const error= this.state.error
         const dayDiapers = this.state.log.filter(diaper => moment().diff(moment(diaper.diaperdate + diaper.diapertime, ('YYYY-MM-DDhh:mm')), 'hours') < 24)
         return (

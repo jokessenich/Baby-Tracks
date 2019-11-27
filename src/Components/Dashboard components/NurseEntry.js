@@ -19,7 +19,6 @@ export default class NurseEntry extends React.Component {
     }
 
     toggleUpdate = () => {
-        console.log('update connected')
         this.setState({
             update: !this.state.update
         })
@@ -31,13 +30,10 @@ export default class NurseEntry extends React.Component {
         this.setState({
             [target]: value
         })
-        console.log(this.state)
     }
 
     handleUpdate = (e) => {
         e.preventDefault()
-        console.log('updating')
-        debugger;
         let rightmin = e.target['update-right-minutes'].value
         let rightsec = e.target['update-right-seconds'].value
         let leftmin = e.target['update-left-minutes'].value
