@@ -136,7 +136,7 @@ export default class Diapers extends React.Component {
                         <input type="radio" id="pees" value="Pees" checked={this.state.diaper === 'Pees'} onChange={this.handleChange}></input>
                         <label htmlFor="pees">Pees</label>
                         <input type="radio" id="mixed" value="Mixed" checked={this.state.diaper === 'Mixed'} onChange={this.handleChange}></input>
-                        <label htmlFor="mixed">Mixed</label>
+                        <label htmlFor="mixed">Mixed</label><br />
 
                     <button type="submit" className = "save-button">Save</button>
                     </fieldset>

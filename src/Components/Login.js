@@ -58,6 +58,7 @@ export default class Login extends React.Component {
         return (
             <div className="login-page">
                 <h1 className="log-header">Login</h1>
+                <p>Baby Tracks is an app that allows users to track the nursing, diapers and sleeping habits of their babies. The nursing timer can be for the left or right side and the start time can be edited as needed.</p>
                 <form onSubmit={this.onSubmit}>
                     <fieldset className="login-field">
                         <label htmlFor="email">Email</label><br />
@@ -70,9 +71,11 @@ export default class Login extends React.Component {
                         <label htmlFor="password">Password</label><br />
                         <input
                             className="login-input"
-                            type="text"
+                            type="password"
                             name="userpassword"></input><br />
                         {error}<br />
+                        Demo Account Email: Demo {<br />}
+                        Demo Account Password: 1234{<br />}
                         <button className="save-button" type="submit">Login</button>
                     </fieldset>
                 </form>
