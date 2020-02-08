@@ -1,8 +1,10 @@
 import React from 'react'
 
 export default class NursingStartTimer extends React.Component {
+
     constructor(props) {
         super(props)
+
         this.state = {
             change: false
         }
@@ -20,11 +22,21 @@ export default class NursingStartTimer extends React.Component {
         return (
             <div>
                 <form onSubmit={this.props.changeStart}>
-        <label htmlFor="startTime">Change Start Time {<br />}</label>
-                    <input type="time" id="startTime" defaultValue={this.props.startTime.format('HH:mm')}></input>
-                    <button type="submit" className = "save-button">Change</button>
-                </form>
 
+                    <label htmlFor="startTime">Change Start Time {<br />}</label>
+                    <input 
+                        type="time" 
+                        id="startTime" 
+                        defaultValue={this.props.startTime.format('HH:mm')}>
+                        </input>
+
+                    <button 
+                        type="submit" 
+                        className="save-button">
+                        Change
+                        </button>
+                        
+                </form>
             </div>
         )
     }

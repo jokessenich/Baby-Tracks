@@ -1,68 +1,42 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Baby Tracks App!
 
-## Available Scripts
+This is a Baby Tracks App which can be used to track the nursing, eating, and sleeping of a newborn baby. A link to the app can be found here.
 
-In the project directory, you can run:
+https://baby-tracks-app.johnnykessenich.now.sh/user/login
 
-### `npm start`
+## Documentation for the API
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+The API can be found at 
+https://baby-tracks-server.herokuapp.com/api
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+### ENDPOINTS
 
-### `npm test`
+ALL ENDPOINTS REQUIRE VALID TOKEN
+Operations avaliable are GET
+User can add '/:id'  after token to use a particularly entry by ID
+Operations are GET, DELETE, PATCH
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+/sleep/[TOKEN]- returns the sleep entries for the user
 
-### `npm run build`
+/nursing/[TOKEN]- returns the nursing entries for the user
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+/diapers[TOKEN]- returns the diaper entries for the user
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Summary
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Users can login and proceed to 3 different options of baby tracking.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Diapers- users can input the date and time of the diaper and see past diaper events.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Sleep- users can input the date and times of the sleep beginning and end times
 
-## Learn More
+Nursing- users can use a timer to time the nursings of their baby. The timer times on either side and the user can switch in between. 
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Technology Used
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The server was built with node, express, postgreSQL, knex.
 
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+The client was built with react.

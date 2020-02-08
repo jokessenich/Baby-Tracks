@@ -8,30 +8,24 @@ const ms = require('pretty-ms')
 
 
 export default class Nursing extends React.Component {
+
     constructor(props) {
         super(props)
+
         this.state = {
             log: [],
-            left: {
-                time: 0,
-                isOn: false,
-                start: 0
-            },
-            right: {
-                time: 0,
-                isOn: false,
-                start: 0
-            },
-            total: {
-                time: 0,
-                isOn: false,
-                start: 0
-            },
+
+            left: { time: 0, isOn: false, start: 0 },
+
+            right: { time: 0, isOn: false, start: 0 },
+
+            total: { time: 0, isOn: false, start: 0 },
+
             rightSideFirst: true,
             error: null
         }
-
     }
+
 
     componentDidMount() {
         fetch(`${config.API_BASE_URL}/nursing/${localStorage.getItem('token')}`)
@@ -43,6 +37,7 @@ export default class Nursing extends React.Component {
                 }
                 return res.json()
             })
+
             .then(res => {
 
                 this.setState({
@@ -51,20 +46,20 @@ export default class Nursing extends React.Component {
             })
     }
 
+
     startLeftTimer = () => {
         let startTime = moment()
+
         if (this.state.right.start === 0 && this.state.left.start === 0) {
+
             this.setState({
-                total: {
-                    isOn: false,
-                    time: 0,
-                    start: startTime
-                },
+                total: { isOn: false, time: 0, start: startTime },
                 rightSideFirst: false
             })
         }
 
         if (!this.state.right.isOn && !this.state.left.isOn) {
+
             this.setState({
                 left: {
                     isOn: true,
@@ -72,49 +67,60 @@ export default class Nursing extends React.Component {
                     start: startTime.subtract(this.state.left.time, 'milliseconds')
                 }
             })
+
             this.timer = setInterval(() =>
+
                 this.setState({
                     left: {
                         isOn: true,
                         time: moment().diff(this.state.left.start, 'milliseconds'),
                         start: this.state.left.start
                     },
+
                     total: {
                         isOn: true,
                         time: this.state.left.time + this.state.right.time + 1000,
                         start: this.state.total.start
                     }
+
                 }), 1000);
         }
     }
 
+
     stopLeftTimer = () => {
         this.setState({
-            left: {
+            left:
+            {
                 isOn: false,
                 time: this.state.left.time,
                 start: this.state.left.start
             }
         })
+
         clearInterval(this.timer)
-
-
     }
 
+
     startRightTimer = () => {
+
         let rightNow = moment()
+
         if (this.state.right.start === 0 && this.state.left.start === 0) {
+
             this.setState({
                 total: {
                     isOn: false,
                     time: 0,
                     start: rightNow
                 },
+
                 rightSideFirst: true
             })
         }
 
         if (!this.state.right.isOn && !this.state.left.isOn) {
+
             this.setState({
                 right: {
                     isOn: true,
@@ -122,7 +128,9 @@ export default class Nursing extends React.Component {
                     start: rightNow.subtract(this.state.right.time, 'milliseconds')
                 }
             })
+
             this.timer = setInterval(() =>
+
                 this.setState({
                     right: {
                         isOn: true,
@@ -134,11 +142,14 @@ export default class Nursing extends React.Component {
                         time: this.state.left.time + this.state.right.time + 1000,
                         start: this.state.total.start
                     }
+
                 }), 1000);
         }
     }
 
+
     stopRightTimer = () => {
+
         this.setState({
             right: {
                 isOn: false,
@@ -146,16 +157,21 @@ export default class Nursing extends React.Component {
                 start: this.state.right.start
             }
         })
+
         clearInterval(this.timer)
     }
 
+
     handleSubmit = (e) => {
+
         e.preventDefault();
+
         let right = this.state.right.time
         let left = this.state.left.time
         let total = this.state.total.time
         let startTime = this.state.total.start.format('YYYY-MM-DDhh:mm a')
         let end = this.state.total.start.add(total, 'milliseconds').format('YYYY-MM-DDhh:mm a')
+
         const newNurse = {
             starttime: startTime,
             endtime: end,
@@ -171,6 +187,7 @@ export default class Nursing extends React.Component {
             },
             body: JSON.stringify(newNurse)
         })
+
             .then(res => {
                 if (!res.ok) {
                     this.setState({
@@ -178,16 +195,18 @@ export default class Nursing extends React.Component {
                     })
                 }
             })
+
             .then(window.location.reload())
 
-
         this.setState({
+
             log: [newNurse, ...this.state.log],
             left: {
                 time: 0,
                 isOn: false,
                 start: 0
             },
+
             right: {
                 time: 0,
                 isOn: false,
@@ -199,34 +218,38 @@ export default class Nursing extends React.Component {
                 start: 0
             },
         })
-
-
     }
 
+
     handleDelete = (e) => {
+
         const id = parseInt(e.target.id)
+        const nursings = this.state.log.filter(nurse => nurse.id !== id)
+
         fetch(`${config.API_BASE_URL}/nursing/${localStorage.getItem('token')}/${id}`, {
             method: 'DELETE',
             headers: {
                 'content-type': 'application/json'
             },
         })
-        const nursings = this.state.log.filter(nurse => nurse.id !== id)
+
         this.setState({
             log: nursings
         })
-
-
     }
 
+
     changeStart = (e) => {
+
+        e.preventDefault();
 
         const newStart = moment(e.target.startTime.value, ('hh:mm a'))
         const timeDiff = this.state.total.start.diff(newStart, 'minutes')
         const timeDiffInMs = timeDiff * 60000
-        e.preventDefault();
+
 
         if (this.state.rightSideFirst && this.state.right.isOn) {
+
             this.setState({
                 right: {
                     start: this.state.right.start.subtract(timeDiff, 'minutes'),
@@ -235,23 +258,26 @@ export default class Nursing extends React.Component {
                 }
             })
         }
+
         else if (this.state.rightSideFirst) {
+
             this.setState({
                 right: {
                     start: this.state.right.start.subtract(timeDiff, 'minutes'),
                     time: this.state.right.time + timeDiffInMs,
                     isOn: this.state.right.isOn
                 },
+
                 total: {
                     start: newStart,
                     time: this.state.total.time + timeDiffInMs,
                     isOn: this.state.total.isOn
                 }
             })
-
         }
 
         else if (!this.state.rightSideFirst && this.state.left.isOn) {
+
             this.setState({
                 left: {
                     start: this.state.left.start.subtract(timeDiff, 'minutes'),
@@ -260,13 +286,16 @@ export default class Nursing extends React.Component {
                 }
             })
         }
+
         else if (!this.state.rightSideFirst) {
+
             this.setState({
                 left: {
                     start: this.state.left.start.subtract(timeDiff, 'minutes'),
                     time: this.state.left.time + timeDiffInMs,
                     isOn: this.state.left.isOn
                 },
+
                 total: {
                     start: newStart,
                     time: this.state.total.time + timeDiffInMs,
@@ -276,24 +305,46 @@ export default class Nursing extends React.Component {
         }
     }
 
-
     render() {
+
         const left = (!this.state.left.isOn) ?
-            <button onClick={this.startLeftTimer} className="nursing-timer-button">L</button> :
+            <button
+                onClick={this.startLeftTimer}
+                className="nursing-timer-button">
+                L
+                </button> 
+                :
             <button
                 onClick={this.stopLeftTimer}
                 className="nursing-timer-button">
                 <i class="material-icons">pause</i>
-            </button>
+                </button>
 
         const right = (!this.state.right.isOn) ?
-            <button onClick={this.startRightTimer} className="nursing-timer-button">R</button> :
-            <button onClick={this.stopRightTimer} className="nursing-timer-button"><i class="material-icons">pause</i>
-            </button>
+            <button 
+                onClick={this.startRightTimer} 
+                className="nursing-timer-button">
+                R
+                </button> 
+                :
+            <button 
+                onClick={this.stopRightTimer} 
+                className="nursing-timer-button">
+                <i class="material-icons">
+                pause
+                </i>
+                </button>
 
-        const pastNurse = this.state.log.map(nurse => <NurseEntry nurseProp={nurse} handleDelete={this.handleDelete} key = {"nurse"+nurse.id}></NurseEntry>)
+        const pastNurse = this.state.log.map(nurse => <NurseEntry 
+                                                        nurseProp={nurse} 
+                                                        handleDelete={this.handleDelete} 
+                                                        key={"nurse" + nurse.id}>
+                                                        </NurseEntry>)
 
-        const nursingStartTime = this.state.total.isOn ? <NursingStartTimer changeStart={this.changeStart} startTime={moment().subtract((this.state.total.time) / 1000, 'seconds')}></NursingStartTimer> : ""
+        const nursingStartTime = this.state.total.isOn ? <NursingStartTimer 
+                                                            changeStart={this.changeStart} 
+                                                            startTime={moment().subtract((this.state.total.time) / 1000, 'seconds')}>
+                                                            </NursingStartTimer> : ""
 
         const average = (this.state.log.length > 0) ? (this.state.log.reduce((total, next) => total + next.duration, 0) / this.state.log.length) : 0;
         const avgRight = (this.state.log.filter(nurse => nurse.rightside !== 0).length > 0) ? (this.state.log.reduce((total, next) => total + next.rightside, 0) / this.state.log.filter(nurse => nurse.rightside !== 0).length) : 0;
@@ -302,29 +353,34 @@ export default class Nursing extends React.Component {
         const error = this.state.error
 
         return (
+
             <div className="nursing-page">
                 <h1>Nursing {<br />}</h1>
                 {error}
+
                 <section className="timer">
+
                     <h2 className="current-time">{ms(this.state.total.time)}</h2>
                     <br />
                     {nursingStartTime}
+
                     {left}
                     {right}<br />
+                    
                     <span>L: {ms(this.state.left.time)}</span><br />
                     <span>R: {ms(this.state.right.time)}</span><br />
                     <button type="submit" className="save-button" onClick={this.handleSubmit}>Save</button>
+
                 </section>
 
                 <h2 className="avg time">Averages : </h2>
                 <h3 className="right-left avg">Total: {ms(average)} {<br />} R:  {ms(avgRight)} {<br />}   L:  {ms(avgLeft)}</h3>
 
-
                 <section>
                     <h2 className="nursing-entry-header">Past Nursing Entries</h2>
                     {pastNurse}
-
                 </section>
+                
             </div >
         )
     }

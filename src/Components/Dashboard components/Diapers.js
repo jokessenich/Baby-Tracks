@@ -5,8 +5,10 @@ import DiaperEntry from './DiaperEntry'
 import config from '../../config.js'
 
 export default class Diapers extends React.Component {
+
     constructor(props) {
         super(props)
+
         this.state = {
             diaper: 'Pees',
             log: [],
@@ -14,20 +16,23 @@ export default class Diapers extends React.Component {
         }
     }
 
+
     componentDidMount() {
+
         fetch(`${config.API_BASE_URL}/diapers/${localStorage.getItem('token')}`)
             .then(res => {
-                if (!res.ok){
+                if (!res.ok) {
                     this.props.history.push('/error')
                 }
-                        
                 return res.json()
             })
+
             .then(diapers => {
                 this.setState({
                     log: diapers.reverse()
                 })
             })
+
             .catch(error => {
                 this.setState({
                     error: error
@@ -35,14 +40,18 @@ export default class Diapers extends React.Component {
             })
     }
 
+
     handleChange = (e) => {
         this.setState({
             diaper: e.target.value
         })
     }
 
+
     handleSubmit = (e) => {
+
         e.preventDefault();
+
         const newDiaper = {
             diaperdate: e.target['date'].value,
             diapertime: e.target['time'].value,
@@ -56,6 +65,7 @@ export default class Diapers extends React.Component {
             },
             body: JSON.stringify(newDiaper)
         })
+
             .then(res => {
                 if (!res.ok) {
                     return res.json()
@@ -63,20 +73,23 @@ export default class Diapers extends React.Component {
                             throw error
                         })
                 }
-            })
-            .then(res=>{
-                if (moment().diff(moment(newDiaper.diaperdate + newDiaper.diapertime, ('YYYY-MM-DDhh:mm')))<0){
+                })
+
+            .then(res => {
+
+                if (moment().diff(moment(newDiaper.diaperdate + newDiaper.diapertime, ('YYYY-MM-DDhh:mm'))) < 0) {
                     this.setState({
                         error: "Date cannot be in the future"
                     })
                 }
-                else{
-                this.setState({
-                    log: [newDiaper, ...this.state.log]
-                })
-                window.location.reload()
-            }}
-            )
+
+                else {
+                    this.setState({
+                        log: [newDiaper, ...this.state.log]
+                    })
+                    window.location.reload()
+                }
+            })
 
             .catch(error => {
                 this.setState({
@@ -84,6 +97,7 @@ export default class Diapers extends React.Component {
                 })
             })
     }
+
 
     handleDelete = (e) => {
 
@@ -95,41 +109,54 @@ export default class Diapers extends React.Component {
                 'content-type': 'application/json'
             },
         })
-        .then(res=>{
-            if(!res.ok){
-                return res.json()
-                .then(error=>{
-                throw error
-            })}
 
-        })
-        .then(res=>{
-            const diapers = this.state.log.filter(diapers => diapers.id !== id)
-            this.setState({
-                log: diapers
-        })
-    })
-        .catch(error=> {
-            this.setState({
-                error: error.message
+            .then(res => {
+                if (!res.ok) {
+                    return res.json()
+                        .then(error => {
+                            throw error
+                        })
+                }
             })
-        
-        
 
-        })
-        
+            .then(res => {
+                const diapers = this.state.log.filter(diapers => diapers.id !== id)
+                this.setState({
+                    log: diapers
+                })
+            })
 
+            .catch(error => {
+                this.setState({
+                    error: error.message
+                })
+            })
     }
 
+
+
     render() {
-        const pastDiapers = this.state.log.map(diaper => <DiaperEntry key = {"diaper"+diaper.id} diaperProp={diaper} handleDelete={this.handleDelete} ></DiaperEntry>)
-        const error= this.state.error
-        const dayDiapers = this.state.log.filter(diaper => moment().diff(moment(diaper.diaperdate + diaper.diapertime, ('YYYY-MM-DDhh:mm')), 'hours') < 24)
+
+        const pastDiapers = this.state.log.map(diaper => <DiaperEntry 
+                                                            key={"diaper" + diaper.id} 
+                                                            diaperProp={diaper} 
+                                                            handleDelete={this.handleDelete}>
+                                                            </DiaperEntry>)
+
+        const error = this.state.error
+        const dayDiapers = this.state.log.filter(diaper => moment().diff(moment(diaper.diaperdate + 
+                                                                                    diaper.diapertime, 
+                                                                                    ('YYYY-MM-DDhh:mm')),
+                                                                                    'hours') < 24)
+        
         return (
+
             <div className="diaper-page">
                 <h1>Diapers</h1>
                 <h2>Total Diapers in the last 24 hours: {dayDiapers.length}</h2>
+
                 <form onSubmit={this.handleSubmit}>
+
                     <fieldset>
                         {error} <br />
                         <label htmlFor="Date">Date</label>
@@ -145,17 +172,16 @@ export default class Diapers extends React.Component {
                         <label htmlFor="pees">Pees</label>
                         <input type="radio" id="mixed" value="Mixed" checked={this.state.diaper === 'Mixed'} onChange={this.handleChange}></input>
                         <label htmlFor="mixed">Mixed</label><br />
-
-                    <button type="submit" className = "save-button">Save</button>
+                        <button type="submit" className="save-button">Save</button>
                     </fieldset>
+
                 </form>
 
                 <section>
                     <h2>Past Diaper Entries</h2>
                     {pastDiapers}
-
-                    <p></p>
                 </section>
+                
             </div>
         )
     }

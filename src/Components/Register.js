@@ -9,7 +9,8 @@ export default class Register extends React.Component {
             password: "",
             email: "",
             error: null,
-            repeatPassword: ""
+            repeatPassword: "",
+            username: ""
         }
     }
 
@@ -24,6 +25,7 @@ export default class Register extends React.Component {
 
     onSubmit = (e) => {
         e.preventDefault()
+        let username =  this.state.username.toLowerCase()
         let userpassword = this.state.password
         let email = this.state.email.toLowerCase()
         let newUser = { userpassword, email }
